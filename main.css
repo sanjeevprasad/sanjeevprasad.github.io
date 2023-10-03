@@ -34,7 +34,7 @@ p {
   font-size: 1.5rem;
 }
 
-.do-nothing-button {
+.button {
   background-color: #000;
   color: #fff;
   border: 1px solid #fff;
@@ -44,10 +44,19 @@ p {
   text-transform: uppercase;
   transition: all 0.3s ease;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.do-nothing-button:hover {
+.button:hover {
   background-color: #fff;
   color: #000;
   border: 1px solid #000;
+}
+
+svg {
+  fill: #fff;
+}
+
+.button:hover > svg {
+  fill: #000;
 }
