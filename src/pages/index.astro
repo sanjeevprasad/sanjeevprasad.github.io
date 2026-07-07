@@ -10,13 +10,6 @@ const sortedCaseStudies = [...caseStudies].sort((left, right) => {
   return left.order - right.order;
 });
 
-const proof = [
-  ['4 GB -> 16 MB', 'backend memory reduction'],
-  ['4 years', 'crash-free production uptime'],
-  ['1.5 sec', 'embedded GUI boot time'],
-  ['10k+', 'field devices monitored'],
-];
-
 const focusAreas = [
   [
     'Systems Architecture',
@@ -66,15 +59,6 @@ const focusAreas = [
       <CapabilityMap />
     </section>
 
-    <section class="grid overflow-hidden rounded-lg border border-white/15 bg-white/15 shadow-2xl sm:grid-cols-2 lg:grid-cols-4" aria-label="Selected results">
-      {proof.map(([value, label]) => (
-        <div class="min-h-32 border-white/15 bg-white/[0.08] p-6 sm:border-r last:border-r-0">
-          <strong class="mb-2 block text-3xl leading-none text-gold">{value}</strong>
-          <span class="text-zinc-300">{label}</span>
-        </div>
-      ))}
-    </section>
-
     <section id="case-studies" class="pt-24">
       <div class="mb-8 max-w-3xl">
         <p class="mb-3 text-xs font-extrabold uppercase tracking-wider text-mint">Case Studies</p>
@@ -114,6 +98,43 @@ const focusAreas = [
           </div>
         ))}
       </div>
+    </section>
+
+    <section id="projects" class="pt-24">
+      <div class="mb-8 max-w-3xl">
+        <p class="mb-3 text-xs font-extrabold uppercase tracking-wider text-mint">Projects</p>
+        <h2 class="text-[clamp(2rem,4vw,3.45rem)] font-extrabold leading-tight tracking-normal">Personal tools</h2>
+        <p class="mt-4 text-lg text-zinc-300">
+          Small utilities and experiments built to solve practical problems.
+        </p>
+      </div>
+
+      <article class="rounded-lg border border-white/15 bg-white/[0.08] p-6 shadow-xl md:p-8">
+        <div class="flex flex-wrap items-start justify-between gap-4">
+          <div class="max-w-3xl">
+            <p class="mb-3 text-xs font-extrabold uppercase tracking-wider text-mint">Svelte / Tailwind / Monaco</p>
+            <h3 class="text-2xl font-extrabold leading-tight">Resume Builder</h3>
+            <p class="mt-4 text-zinc-300">
+              A browser-only JSON resume builder for quickly editing, previewing, and printing a resume without
+              uploading data to a server.
+            </p>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <a
+              class="inline-flex min-h-11 items-center justify-center rounded-md border border-mint/70 bg-mint px-4 py-2 font-extrabold text-ink no-underline transition hover:-translate-y-px"
+              href="/resume-builder/"
+            >
+              Open
+            </a>
+            <a
+              class="inline-flex min-h-11 items-center justify-center rounded-md border border-white/15 bg-white/10 px-4 py-2 font-extrabold text-white no-underline transition hover:-translate-y-px"
+              href="https://github.com/sanjeevprasad/resume-builder"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
+      </article>
     </section>
 
     <section id="contact" class="my-24 grid items-center gap-8 rounded-lg border border-white/15 bg-zinc-100 p-6 text-zinc-950 md:grid-cols-[1fr_auto] md:p-10">

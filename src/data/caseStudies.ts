@@ -179,32 +179,37 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     slug: 'graphql-query-cost-proxy',
-    title: 'GraphQL Query Cost Reverse Proxy',
+    title: 'Rust GraphQL Protection Proxy',
     description:
-      'A reverse proxy that evaluates GraphQL query cost before forwarding requests to backend infrastructure.',
+      'A Rust reverse proxy that parses GraphQL requests, enforces query depth and schema-based cost limits, and forwards safe traffic upstream.',
     summary:
-      'Built a reverse proxy that limits high-cost GraphQL requests before they reach backend services.',
+      'Built a Rust Hyper/Tokio proxy that protects GraphQL services with query depth checks, cost directives, JWT-aware rate limits, and upstream forwarding.',
     system: 'Infrastructure/security project',
     order: 5,
-    tags: ['GraphQL', 'Reverse proxy', 'Security', 'DDoS mitigation'],
+    tags: ['Rust', 'GraphQL', 'Reverse proxy', 'Rate limiting', 'DDoS mitigation'],
     metric: {
-      value: 'Early reject',
-      label: 'for expensive GraphQL traffic',
+      value: 'Pre-forward',
+      label: 'GraphQL cost and depth validation',
     },
     context: [
-      'GraphQL endpoints can be difficult to protect because a small request can trigger a large backend workload depending on query depth, shape, and resolver behavior.',
+      'The goal was to put a protective layer in front of GraphQL services before requests reached the upstream backend.',
+      'GraphQL endpoints can be difficult to protect because a small HTTP request can trigger a large backend workload depending on query depth, nested selections, resolver behavior, and list arguments.',
     ],
     problem: [
-      'Traditional request limits do not always map cleanly to GraphQL.',
-      'A request may look small at the HTTP layer while still being expensive for the application to execute.',
+      'Traditional HTTP request limits do not map cleanly to GraphQL query cost.',
+      'A request may look small at the transport layer while still being expensive for the application to execute.',
+      'The proxy needed to support multiple services, service-level rate limits, session-level rate limits, authentication, upstream timeouts, and optional failover endpoints.',
     ],
     approach: [
-      'Built a reverse proxy that evaluated incoming GraphQL query cost before forwarding requests.',
-      'Rejected abusive or overly expensive traffic before backend services had to perform costly work.',
+      'Built the proxy in Rust using Hyper and Tokio.',
+      'Parsed GraphQL requests with graphql-parser instead of relying on string heuristics.',
+      'Loaded a GraphQL schema and supported @cost directives with complexity, dbcost, servercost, and argument multipliers such as limit.',
+      'Implemented query-depth checks, schema-aware cost calculation, recursion handling, service-level rate limits, JWT/session-based rate limits, upstream timeout handling, and optional failover forwarding.',
     ],
     outcome: [
-      'The proxy added a practical protection layer between public traffic and backend infrastructure.',
-      'It reduced exposure to high-cost GraphQL requests.',
+      'Requests that exceeded depth or cost limits were rejected before reaching upstream services.',
+      'Invalid GraphQL bodies, schema mismatches, invalid arguments, authentication failures, and rate-limit violations returned early with appropriate error responses.',
+      'The result was a practical protection layer for GraphQL services that combined request validation, cost control, rate limiting, and reverse proxy forwarding.',
     ],
   },
 ];
