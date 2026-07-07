@@ -1,0 +1,30 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  label: string;
+  icon: string;
+  codes: number[];
+  class?: string;
+}
+
+const { label, icon, codes, class: className = '' } = Astro.props;
+---
+
+<button class={className} type="button" data-obfuscated-link={JSON.stringify(codes)}>
+  <Icon name={icon} class="mr-2 h-4 w-4" aria-hidden="true" />
+  {label}
+</button>
+
+<script>
+  const decode = (parts) => parts.map((code) => String.fromCharCode(code - 7)).join('');
+
+  document.querySelectorAll('[data-obfuscated-link]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const encoded = button.getAttribute('data-obfuscated-link');
+      if (!encoded) return;
+
+      window.location.href = decode(JSON.parse(encoded));
+    });
+  });
+</script>

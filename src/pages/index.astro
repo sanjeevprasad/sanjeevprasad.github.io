@@ -6,6 +6,7 @@ import Header from '../components/Header.astro';
 import CapabilityMap from '../components/CapabilityMap.astro';
 import CaseStudyCard from '../components/CaseStudyCard.astro';
 import ContactButton from '../components/ContactButton.astro';
+import ObfuscatedExternalLink from '../components/ObfuscatedExternalLink.astro';
 import { caseStudies } from '../data/caseStudies';
 
 const sortedCaseStudies = [...caseStudies].sort((left, right) => {
@@ -161,13 +162,16 @@ const focusAreas = [
           <Icon name="simple-icons:github" class="mr-2 h-4 w-4" aria-hidden="true" />
           GitHub
         </a>
-        <a
-          class="inline-flex min-h-12 items-center justify-center rounded-md border border-zinc-950/20 bg-transparent px-5 py-3 font-extrabold text-zinc-950 no-underline transition hover:-translate-y-px"
-          href="https://www.linkedin.com/in/sanjeevprasadthakur/"
-        >
-          <Icon name="simple-icons:linkedin" class="mr-2 h-4 w-4" aria-hidden="true" />
-          LinkedIn
-        </a>
+        <ObfuscatedExternalLink
+          label="LinkedIn"
+          icon="simple-icons:linkedin"
+          class="inline-flex min-h-12 items-center justify-center rounded-md border border-zinc-950/20 bg-transparent px-5 py-3 font-extrabold text-zinc-950 transition hover:-translate-y-px"
+          codes={[
+            111, 123, 123, 119, 122, 65, 54, 54, 126, 126, 126, 53, 115, 112, 117, 114, 108, 107,
+            112, 117, 53, 106, 118, 116, 54, 112, 117, 54, 122, 104, 117, 113, 108, 108, 125, 119,
+            121, 104, 122, 104, 107, 123, 111, 104, 114, 124, 121, 54,
+          ]}
+        />
       </div>
     </section>
   </main>
