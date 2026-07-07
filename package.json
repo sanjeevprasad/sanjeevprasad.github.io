@@ -9,8 +9,11 @@
     "preview": "astro preview"
   },
   "dependencies": {
+    "@iconify-json/simple-icons": "^1.2.89",
+    "@lucide/astro": "^1.23.0",
     "@tailwindcss/vite": "^4.3.2",
     "astro": "^7.0.6",
+    "astro-icon": "^1.1.5",
     "tailwindcss": "^4.3.2",
     "typescript": "^6.0.3"
   }
