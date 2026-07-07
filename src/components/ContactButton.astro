@@ -1,0 +1,29 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<button
+  class="inline-flex min-h-12 items-center justify-center rounded-md border border-mint/70 bg-mint px-5 py-3 font-extrabold text-ink no-underline transition hover:-translate-y-px"
+  type="button"
+  data-contact
+>
+  {label}
+</button>
+
+<script>
+  const decode = (parts) => parts.map((code) => String.fromCharCode(code - 7)).join('');
+  const address = [
+    [123, 111, 112, 122, 53, 122, 104, 117, 113, 108, 108, 125, 119, 121, 104, 122, 104, 107],
+    [110, 116, 104, 112, 115, 53, 106, 118, 116],
+  ].map(decode).join('@');
+
+  document.querySelectorAll('[data-contact]').forEach((button) => {
+    button.addEventListener('click', () => {
+      window.location.href = `mailto:${address}`;
+    });
+  });
+</script>

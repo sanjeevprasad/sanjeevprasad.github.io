@@ -1,0 +1,74 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = 'System view' } = Astro.props;
+---
+
+<section class="not-prose mt-8 rounded-lg border border-white/15 bg-white/[0.08] p-5 shadow-xl" data-system-toggle>
+  <div class="flex flex-wrap items-center justify-between gap-3">
+    <h3 class="m-0 text-xl font-extrabold text-white">{title}</h3>
+    <div class="flex rounded-md border border-white/15 bg-black/20 p-1">
+      <button class="rounded px-3 py-2 text-sm font-extrabold text-ink data-[active=true]:bg-mint data-[active=false]:text-zinc-300" data-view="before" data-active="true" type="button">
+        Before
+      </button>
+      <button class="rounded px-3 py-2 text-sm font-extrabold text-ink data-[active=true]:bg-mint data-[active=false]:text-zinc-300" data-view="after" data-active="false" type="button">
+        After
+      </button>
+    </div>
+  </div>
+
+  <div class="mt-5 grid gap-3 md:grid-cols-3" data-panel="before">
+    <div class="rounded-md border border-red-300/30 bg-red-950/30 p-4">
+      <strong class="block text-red-100">Heavy runtime</strong>
+      <span class="mt-2 block text-sm text-red-100/75">Large dependency graph and high baseline memory.</span>
+    </div>
+    <div class="rounded-md border border-red-300/30 bg-red-950/30 p-4">
+      <strong class="block text-red-100">Operational instability</strong>
+      <span class="mt-2 block text-sm text-red-100/75">Crashes and difficult recovery under production load.</span>
+    </div>
+    <div class="rounded-md border border-red-300/30 bg-red-950/30 p-4">
+      <strong class="block text-red-100">Higher hosting cost</strong>
+      <span class="mt-2 block text-sm text-red-100/75">Infrastructure sized for framework overhead.</span>
+    </div>
+  </div>
+
+  <div class="mt-5 hidden gap-3 md:grid-cols-3" data-panel="after">
+    <div class="rounded-md border border-mint/30 bg-mint/10 p-4">
+      <strong class="block text-mint">Rust service</strong>
+      <span class="mt-2 block text-sm text-zinc-300">Small memory footprint and explicit resource ownership.</span>
+    </div>
+    <div class="rounded-md border border-mint/30 bg-mint/10 p-4">
+      <strong class="block text-mint">Stable production path</strong>
+      <span class="mt-2 block text-sm text-zinc-300">Simpler failure modes and long-running uptime.</span>
+    </div>
+    <div class="rounded-md border border-mint/30 bg-mint/10 p-4">
+      <strong class="block text-mint">Lower cost</strong>
+      <span class="mt-2 block text-sm text-zinc-300">Moved from oversized cloud instance to modest hosting.</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll('[data-system-toggle]').forEach((root) => {
+    const buttons = root.querySelectorAll('button[data-view]');
+    const panels = root.querySelectorAll('[data-panel]');
+
+    buttons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const view = button.getAttribute('data-view');
+
+        buttons.forEach((candidate) => {
+          candidate.setAttribute('data-active', String(candidate === button));
+        });
+
+        panels.forEach((panel) => {
+          const isActive = panel.getAttribute('data-panel') === view;
+          panel.classList.toggle('hidden', !isActive);
+          panel.classList.toggle('grid', isActive);
+        });
+      });
+    });
+  });
+</script>

@@ -1,0 +1,142 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import CapabilityMap from '../components/CapabilityMap.astro';
+import CaseStudyCard from '../components/CaseStudyCard.astro';
+import ContactButton from '../components/ContactButton.astro';
+import { caseStudies } from '../data/caseStudies';
+
+const sortedCaseStudies = [...caseStudies].sort((left, right) => {
+  if (Boolean(left.featured) === Boolean(right.featured)) {
+    return left.title.localeCompare(right.title);
+  }
+
+  return left.featured ? -1 : 1;
+});
+
+const proof = [
+  ['4 GB -> 16 MB', 'backend memory reduction'],
+  ['4 years', 'crash-free production uptime'],
+  ['1.5 sec', 'embedded GUI boot time'],
+  ['Millions', 'of IoT devices monitored'],
+];
+
+const focusAreas = [
+  [
+    'Systems Architecture',
+    'Design and review backend, embedded, IoT, and deployment architecture with reliability and maintainability in mind.',
+  ],
+  [
+    'Rust Backend Engineering',
+    'Build high-performance APIs, WebSocket services, integrations, and async systems with a small operational footprint.',
+  ],
+  [
+    'Embedded Linux & Firmware',
+    'Bring up boards, optimize boot paths, integrate modules, write firmware, and connect edge devices to cloud systems.',
+  ],
+];
+---
+
+<BaseLayout
+  title="Sanjeev Prasad | Systems Engineer"
+  description="Rust, embedded Linux, IoT, and full-stack systems engineer building reliable software from firmware to cloud."
+>
+  <Header />
+
+  <main id="top" class="mx-auto max-w-[1180px] px-5">
+    <section class="grid min-h-[calc(100vh-72px)] items-center gap-10 py-16 lg:grid-cols-[1.12fr_0.88fr] lg:gap-16">
+      <div class="max-w-3xl">
+        <p class="mb-3 text-xs font-extrabold uppercase tracking-wider text-mint">
+          Rust, Embedded Linux & Full-Stack Systems Engineer
+        </p>
+        <h1 class="max-w-5xl text-[clamp(2.7rem,8vw,5.9rem)] font-extrabold leading-[0.96] tracking-normal">
+          Reliable, high-performance systems from firmware to cloud.
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-300 sm:text-xl">
+          10 years across Rust backends, embedded firmware, Linux bring-up, IoT platforms, WebSocket systems,
+          Kubernetes, frontend dashboards, and production architecture.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <ContactButton label="Get in touch" />
+          <a
+            class="inline-flex min-h-12 items-center justify-center rounded-md border border-white/15 bg-white/10 px-5 py-3 font-extrabold text-white no-underline transition hover:-translate-y-px"
+            href="#case-studies"
+          >
+            View case studies
+          </a>
+        </div>
+      </div>
+
+      <CapabilityMap />
+    </section>
+
+    <section class="grid overflow-hidden rounded-lg border border-white/15 bg-white/15 shadow-2xl sm:grid-cols-2 lg:grid-cols-4" aria-label="Selected results">
+      {proof.map(([value, label]) => (
+        <div class="min-h-32 border-white/15 bg-white/[0.08] p-6 sm:border-r last:border-r-0">
+          <strong class="mb-2 block text-3xl leading-none text-gold">{value}</strong>
+          <span class="text-zinc-300">{label}</span>
+        </div>
+      ))}
+    </section>
+
+    <section id="case-studies" class="pt-24">
+      <div class="mb-8 max-w-3xl">
+        <p class="mb-3 text-xs font-extrabold uppercase tracking-wider text-mint">Case Studies</p>
+        <h2 class="text-[clamp(2rem,4vw,3.45rem)] font-extrabold leading-tight tracking-normal">
+          Production systems and case studies
+        </h2>
+        <p class="mt-4 text-lg text-zinc-300">
+          Focused examples of backend, embedded Linux, IoT, and infrastructure problems handled end to end.
+        </p>
+      </div>
+
+      <div class="grid gap-5">
+        {sortedCaseStudies.map((study) => (
+          <CaseStudyCard
+            title={study.title}
+            summary={study.summary}
+            slug={study.slug}
+            tags={study.tags}
+            featured={study.featured}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section id="focus" class="pt-24">
+      <div class="mb-8 max-w-3xl">
+        <p class="mb-3 text-xs font-extrabold uppercase tracking-wider text-mint">Focus</p>
+        <h2 class="text-[clamp(2rem,4vw,3.45rem)] font-extrabold leading-tight tracking-normal">Technical focus</h2>
+      </div>
+      <div class="grid gap-5 md:grid-cols-3">
+        {focusAreas.map(([title, copy]) => (
+          <div class="rounded-lg border border-white/15 bg-white/10 p-6">
+            <h3 class="mb-3 text-xl font-extrabold">{title}</h3>
+            <p class="text-zinc-300">{copy}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="contact" class="my-24 grid items-center gap-8 rounded-lg border border-white/15 bg-zinc-100 p-6 text-zinc-950 md:grid-cols-[1fr_auto] md:p-10">
+      <div>
+        <p class="mb-3 text-xs font-extrabold uppercase tracking-wider text-zinc-950">Contact</p>
+        <h2 class="text-[clamp(2rem,4vw,3.45rem)] font-extrabold leading-tight tracking-normal">
+          Have a technical problem worth discussing?
+        </h2>
+        <p class="mt-3 text-zinc-600">
+          Send a short note about the system, bottleneck, project, or role you have in mind.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <ContactButton label="Say hello" />
+        <a
+          class="inline-flex min-h-12 items-center justify-center rounded-md border border-zinc-950/20 bg-transparent px-5 py-3 font-extrabold text-zinc-950 no-underline transition hover:-translate-y-px"
+          href="https://github.com/sanjeevprasad"
+        >
+          GitHub
+        </a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>

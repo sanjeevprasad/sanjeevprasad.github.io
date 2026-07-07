@@ -1,3 +1,4 @@
+if (window.particlesJS) {
 particlesJS("particles", {
   particles: {
     number: {
@@ -102,3 +103,4 @@ particlesJS("particles", {
   },
   retina_detect: true
 });
+}

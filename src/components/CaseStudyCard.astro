@@ -1,0 +1,29 @@
+---
+interface Props {
+  title: string;
+  summary: string;
+  slug: string;
+  tags: string[];
+  featured?: boolean;
+}
+
+const { title, summary, slug, tags, featured = false } = Astro.props;
+const classes = featured
+  ? 'rounded-lg border border-white/15 bg-gradient-to-br from-mint/15 to-gold/10 p-6 shadow-2xl md:p-8'
+  : 'rounded-lg border border-white/15 bg-white/[0.08] p-6 shadow-xl md:p-8';
+---
+
+<article class={classes}>
+  <h3 class="text-2xl font-extrabold leading-tight">{title}</h3>
+  <p class="mt-4 text-zinc-300">{summary}</p>
+  <ul class="mt-6 flex flex-wrap gap-2 p-0">
+    {tags.map((tag) => (
+      <li class="list-none rounded-full border border-white/15 bg-white/10 px-3 py-1 text-sm text-zinc-200">
+        {tag}
+      </li>
+    ))}
+  </ul>
+  <a class="mt-6 inline-flex font-extrabold text-mint no-underline hover:text-white" href={`/case-studies/${slug}/`}>
+    Read case study
+  </a>
+</article>

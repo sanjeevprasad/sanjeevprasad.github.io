@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+---
+
+<BaseLayout title="Page not found | Sanjeev Prasad" description="The page you are looking for could not be found.">
+  <Header />
+  <main class="mx-auto flex min-h-[70vh] max-w-[760px] flex-col justify-center px-5 py-20">
+    <p class="mb-3 text-xs font-extrabold uppercase tracking-wider text-mint">404</p>
+    <h1 class="text-[clamp(2.5rem,7vw,5rem)] font-extrabold leading-none">Page not found</h1>
+    <p class="mt-5 text-lg text-zinc-300">
+      The page you requested does not exist. The main site has case studies, focus areas, and contact details.
+    </p>
+    <a
+      class="mt-8 inline-flex min-h-12 w-fit items-center justify-center rounded-md border border-mint/70 bg-mint px-5 py-3 font-extrabold text-ink no-underline transition hover:-translate-y-px"
+      href="/"
+    >
+      Back to home
+    </a>
+  </main>
+</BaseLayout>

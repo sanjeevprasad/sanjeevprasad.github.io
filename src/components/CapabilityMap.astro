@@ -1,0 +1,21 @@
+---
+const capabilities = [
+  ['Firmware', 'Rust / C / C++'],
+  ['Linux', 'U-Boot / Yocto / Kernel'],
+  ['Backend', 'Tokio / Hyper / PostgreSQL'],
+  ['Cloud', 'Kubernetes / Docker / CI'],
+  ['Product', 'Web / Mobile / Dashboards'],
+];
+---
+
+<aside
+  class="grid gap-3 rounded-lg border border-white/15 bg-white/[0.08] bg-[repeating-linear-gradient(90deg,transparent_0,transparent_34px,rgba(255,255,255,0.04)_35px)] p-5 shadow-2xl md:p-7"
+  aria-label="Technical capabilities map"
+>
+  {capabilities.map(([label, value]) => (
+    <div class="grid min-h-14 grid-cols-1 gap-1 rounded-md border border-white/15 bg-black/25 p-4 sm:grid-cols-[110px_1fr] sm:gap-3">
+      <span class="text-xs font-extrabold uppercase text-skysoft">{label}</span>
+      <span class="font-mono text-sm text-white">{value}</span>
+    </div>
+  ))}
+</aside>
