@@ -7,18 +7,14 @@ import ContactButton from '../components/ContactButton.astro';
 import { caseStudies } from '../data/caseStudies';
 
 const sortedCaseStudies = [...caseStudies].sort((left, right) => {
-  if (Boolean(left.featured) === Boolean(right.featured)) {
-    return left.title.localeCompare(right.title);
-  }
-
-  return left.featured ? -1 : 1;
+  return left.order - right.order;
 });
 
 const proof = [
   ['4 GB -> 16 MB', 'backend memory reduction'],
   ['4 years', 'crash-free production uptime'],
   ['1.5 sec', 'embedded GUI boot time'],
-  ['Millions', 'of IoT devices monitored'],
+  ['10k+', 'field devices monitored'],
 ];
 
 const focusAreas = [
@@ -86,7 +82,8 @@ const focusAreas = [
           Production systems and case studies
         </h2>
         <p class="mt-4 text-lg text-zinc-300">
-          Focused examples of backend, embedded Linux, IoT, and infrastructure problems handled end to end.
+          These are connected slices of an end-to-end industrial IoT platform: field hardware, embedded Linux,
+          cellular connectivity, telemetry ingestion, dashboards, reports, alerts, and production operations.
         </p>
       </div>
 
@@ -95,6 +92,7 @@ const focusAreas = [
           <CaseStudyCard
             title={study.title}
             summary={study.summary}
+            system={study.system}
             slug={study.slug}
             tags={study.tags}
             featured={study.featured}
